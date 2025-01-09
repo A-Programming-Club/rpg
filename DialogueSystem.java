@@ -7,14 +7,29 @@ public class DialogueSystem {
     // returns the Dialogue that the player exits on
     public Dialogue runDialogue() {
         // check if d is not a dead end
-        
+        while(root.hasNextOption() == false) {
+            // print d
+            for ( Dialogue d : root.getNextOptionsArray()) {
+                System.out.println(d);
+            }
 
-        // print d
-
-        // wait for response to d
-        
-        // change root
+            // wait for response to d
+            
+            // change root
+        }
     }
 
     Dialogue root;
+
+    public static void main(String[] args) {
+        Dialogue r("welcome to the dialouge system",
+            new ArrayList<>(Arrays.asList(
+                Dialogue("Shut up"), 
+                Dialogue("kys"),
+                Dialogue("good god"))
+            ));
+
+        DialogueSystem s(r);
+        s.runDialogue();
+    }
 }
