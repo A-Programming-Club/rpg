@@ -76,7 +76,7 @@ class Euclidian {
     public int y;
     public int z;
     public double distanceTo(int a, int b, int c) {
-
+        return Math.sqrt((x-a)*(x-a)+(y-b)*(y-b)+(z-c)*(z-c));
     }
     public double distanceTo(Cartesian a) {
         return Math.sqrt((x-a.x)*(x-a.x)+(y-a.y)*(y-a.y));
