@@ -10,5 +10,6 @@
 
 # Directories
 .vscode
-build
 .cache
+build
+bin

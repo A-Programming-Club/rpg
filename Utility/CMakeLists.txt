@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 
 include_guard(GLOBAL)
 
-project(entities)
+project(Utility)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,80 +14,37 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #
 # Set to `off` to have each library be output as one file.
 # In this case, the output file will take on the name of the parent directory.
-set(DISCRETE_OUTPUT on)
+set(DISCRETE_OUTPUT off)
 
-set(ENTITY_DIR "${PROJECT_SOURCE_DIR}")
-set(CHARACTER_DIR "${PROJECT_SOURCE_DIR}/Character")
-set(NPC_DIR "${PROJECT_SOURCE_DIR}/NPC")
-set(RACE_DIR "${PROJECT_SOURCE_DIR}/Race")
+set(CARTESIAN_DIR "${PROJECT_SOURCE_DIR}/Cartesian")
+set(EUCLIDEAN_DIR "${PROJECT_SOURCE_DIR}/Euclidean")
 
-function(init_lib_entity target)
-  target_include_directories("${target}" PUBLIC
-    "${CHARACTER_DIR}"
-  )
-  target_sources("${target}"
+function(init_lib_cartesian target)
+  target_sources(${target}
     PUBLIC
-    "${ENTITY_DIR}/entity.hpp"
+    "${CARTESIAN_DIR}/cartesian.hpp"
     PRIVATE
-    "${ENTITY_DIR}/entity.cpp"
+    "${CARTESIAN_DIR}/cartesian.cpp"
   )
 endfunction()
 
-function(init_lib_character target)
-  target_include_directories("${target}" PUBLIC
-    "${CHARACTER_DIR}"
-  )
-  target_sources("${target}"
+function(init_lib_euclidean target)
+  target_sources(${target}
     PUBLIC
-    "${CHARACTER_DIR}/character.hpp"
+    "${EUCLIDEAN_DIR}/euclidean.hpp"
     PRIVATE
-    "${CHARACTER_DIR}/character.cpp"
-  )
-endfunction()
-
-function(init_lib_npc target)
-  target_include_directories("${target}" PUBLIC
-    "${NPC_DIR}"
-  )
-  target_sources("${target}"
-    PUBLIC
-    "${NPC_DIR}/npc.hpp"
-    PRIVATE
-    "${NPC_DIR}/npc.cpp"
-  )
-endfunction()
-
-function(init_lib_race target)
-  target_include_directories("${target}" PUBLIC
-    "${RACE_DIR}"
-  )
-  target_sources("${target}"
-    PUBLIC
-    "${RACE_DIR}/race.hpp"
-    PRIVATE
-    "${RACE_DIR}/race.cpp"
+    "${EUCLIDEAN_DIR}/euclidean.cpp"
   )
 endfunction()
 
 if(DISCRETE_OUTPUT)
-  add_library(entity STATIC)
-  init_lib_entity(entity)
+  add_library(cartesian STATIC)
+  init_lib_cartesian(cartesian)
 
-  add_library(character STATIC)
-  init_lib_character(character)
-  target_link_libraries(character PUBLIC entity)
-
-  add_library(npc STATIC)
-  init_lib_npc(npc)
-  target_link_libraries(npc PUBLIC entity)
-
-  add_library(race STATIC)
-  init_lib_race(race)
-  target_link_libraries(race PUBLIC entity)
+  add_library(euclidean STATIC)
+  init_lib_euclidean(euclidean)
 else()
-  add_library(entity STATIC)
-  init_lib_entity(entity)
-  init_lib_character(entity)
-  init_lib_npc(entity)
-  init_lib_race(entity)
+  add_library(cartesian STATIC)
+  init_lib_cartesian(cartesian)
+  init_lib_euclidean(cartesian)
 endif()

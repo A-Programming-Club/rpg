@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 
 include_guard(GLOBAL)
 
-project(items)
+project(World)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,60 +14,38 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #
 # Set to `off` to have each library be output as one file.
 # In this case, the output file will take on the name of the parent directory.
-set(DISCRETE_OUTPUT on)
+set(DISCRETE_OUTPUT off)
 
-set(ITEM_DIR "${PROJECT_SOURCE_DIR}")
-set(CONSUMABLE_DIR "${PROJECT_SOURCE_DIR}/Consumable")
-set(EQUIPMENT_DIR "${PROJECT_SOURCE_DIR}/Equipment")
+set(WORLD_DIR "${PROJECT_SOURCE_DIR}/World")
+set(REGION_DIR "${WORLD_DIR}/Region")
 
-function(init_lib_item target)
-  target_include_directories("${target}" PUBLIC "${ITEM_DIR}")
-  target_sources("${target}"
+function(init_lib_world target)
+  target_sources(${target}
     PUBLIC
-    "${ITEM_DIR}/item.hpp"
+    "${WORLD_DIR}/world.hpp"
     PRIVATE
-    "${ITEM_DIR}/item.cpp"
+    "${WORLD_DIR}/world.cpp"
   )
 endfunction()
 
-function(init_lib_consumable target)
-  target_include_directories("${target}" PUBLIC "${CONSUMABLE_DIR}")
-  target_sources("${target}"
+function(init_lib_region target)
+  target_sources(${target}
     PUBLIC
-    "${CONSUMABLE_DIR}/consumable.hpp"
+    "${REGION_DIR}/region.hpp"
     PRIVATE
-    "${CONSUMABLE_DIR}/consumable.cpp"
-  )
-endfunction()
-
-function(init_lib_equipment target)
-  set(GARB_DIR "${EQUIPMENT_DIR}/Garb")
-  set(WEAPON_DIR "${EQUIPMENT_DIR}/Weapon")
-  target_include_directories("${target}" PUBLIC "${EQUIPMENT_DIR}")
-  target_sources("${target}"
-    PUBLIC
-    "${GARB_DIR}/garb.hpp"
-    "${WEAPON_DIR}/weapon.hpp"
-    PRIVATE
-    "${GARB_DIR}/garb.cpp"
-    "${WEAPON_DIR}/weapon.cpp"
+    "${REGION_DIR}/region.cpp"
   )
 endfunction()
 
 if(DISCRETE_OUTPUT)
-  add_library(item STATIC)
-  init_lib_item(item)
+  add_library(world STATIC)
+  init_lib_world(world)
 
-  add_library(consumable STATIC)
-  init_lib_consumable(consumable)
-  target_link_libraries(consumable PUBLIC item)
-
-  add_library(equipment STATIC)
-  init_lib_equipment(equipment)
-  target_link_libraries(equipment PUBLIC item)
+  add_library(region STATIC)
+  init_lib_region(region)
+  target_link_libraries(region PUBLIC world)
 else()
-  add_library(item STATIC)
-  init_lib_item(item)
-  init_lib_consumable(item)
-  init_lib_equipment(item)
+  add_library(world STATIC)
+  init_lib_world(world)
+  init_lib_region(world)
 endif()

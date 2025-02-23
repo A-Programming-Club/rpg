@@ -14,14 +14,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 #
 # Set to `off` to have each library be output as one file.
 # In this case, the output file will take on the name of the parent directory.
-set(DISCRETE_OUTPUT on)
+set(DISCRETE_OUTPUT off)
 
-set(ITEM_DIR "${PROJECT_SOURCE_DIR}")
+set(ITEM_DIR ${PROJECT_SOURCE_DIR})
 set(CONSUMABLE_DIR "${PROJECT_SOURCE_DIR}/Consumable")
 set(EQUIPMENT_DIR "${PROJECT_SOURCE_DIR}/Equipment")
 
 function(init_lib_item target)
-  target_sources("${target}"
+  target_sources(${target}
     PUBLIC
     "${ITEM_DIR}/item.hpp"
     PRIVATE
@@ -30,7 +30,7 @@ function(init_lib_item target)
 endfunction()
 
 function(init_lib_consumable target)
-  target_sources("${target}"
+  target_sources(${target}
     PUBLIC
     "${CONSUMABLE_DIR}/consumable.hpp"
     PRIVATE
@@ -41,7 +41,7 @@ endfunction()
 function(init_lib_equipment target)
   set(GARB_DIR "${EQUIPMENT_DIR}/Garb")
   set(WEAPON_DIR "${EQUIPMENT_DIR}/Weapon")
-  target_sources("${target}"
+  target_sources(${target}
     PUBLIC
     "${GARB_DIR}/garb.hpp"
     "${WEAPON_DIR}/weapon.hpp"
