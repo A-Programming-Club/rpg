@@ -1,5 +1,5 @@
 # This version is subject to change as we figure out what standards we will use.
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 
 include_guard(GLOBAL)
 
@@ -22,18 +22,18 @@ set(REGION_DIR "${WORLD_DIR}/Region")
 function(init_lib_world target)
   target_sources(${target}
     PUBLIC
-    "${WORLD_DIR}/world.hpp"
+    "${WORLD_DIR}/World.hpp"
     PRIVATE
-    "${WORLD_DIR}/world.cpp"
+    "${WORLD_DIR}/World.cpp"
   )
 endfunction()
 
 function(init_lib_region target)
   target_sources(${target}
     PUBLIC
-    "${REGION_DIR}/region.hpp"
+    "${REGION_DIR}/Region.hpp"
     PRIVATE
-    "${REGION_DIR}/region.cpp"
+    "${REGION_DIR}/Region.cpp"
   )
 endfunction()
 

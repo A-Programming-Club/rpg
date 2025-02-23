@@ -1,5 +1,5 @@
 # This version is subject to change as we figure out what standards we will use.
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 
 include_guard(GLOBAL)
 
@@ -24,36 +24,36 @@ set(RACE_DIR "${PROJECT_SOURCE_DIR}/Race")
 function(init_lib_entity target)
   target_sources(${target}
     PUBLIC
-    "${ENTITY_DIR}/entity.hpp"
+    "${ENTITY_DIR}/Entity.hpp"
     PRIVATE
-    "${ENTITY_DIR}/entity.cpp"
+    "${ENTITY_DIR}/Entity.cpp"
   )
 endfunction()
 
 function(init_lib_character target)
   target_sources(${target}
     PUBLIC
-    "${CHARACTER_DIR}/character.hpp"
+    "${CHARACTER_DIR}/Character.hpp"
     PRIVATE
-    "${CHARACTER_DIR}/character.cpp"
+    "${CHARACTER_DIR}/Character.cpp"
   )
 endfunction()
 
 function(init_lib_npc target)
   target_sources(${target}
     PUBLIC
-    "${NPC_DIR}/npc.hpp"
+    "${NPC_DIR}/NPC.hpp"
     PRIVATE
-    "${NPC_DIR}/npc.cpp"
+    "${NPC_DIR}/NPC.cpp"
   )
 endfunction()
 
 function(init_lib_race target)
   target_sources(${target}
     PUBLIC
-    "${RACE_DIR}/race.hpp"
+    "${RACE_DIR}/Race.hpp"
     PRIVATE
-    "${RACE_DIR}/race.cpp"
+    "${RACE_DIR}/Race.cpp"
   )
 endfunction()
 

@@ -1,5 +1,5 @@
 # This version is subject to change as we figure out what standards we will use.
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 
 include_guard(GLOBAL)
 
@@ -22,18 +22,18 @@ set(EUCLIDEAN_DIR "${PROJECT_SOURCE_DIR}/Euclidean")
 function(init_lib_cartesian target)
   target_sources(${target}
     PUBLIC
-    "${CARTESIAN_DIR}/cartesian.hpp"
+    "${CARTESIAN_DIR}/Cartesian.hpp"
     PRIVATE
-    "${CARTESIAN_DIR}/cartesian.cpp"
+    "${CARTESIAN_DIR}/Cartesian.cpp"
   )
 endfunction()
 
 function(init_lib_euclidean target)
   target_sources(${target}
     PUBLIC
-    "${EUCLIDEAN_DIR}/euclidean.hpp"
+    "${EUCLIDEAN_DIR}/Euclidean.hpp"
     PRIVATE
-    "${EUCLIDEAN_DIR}/euclidean.cpp"
+    "${EUCLIDEAN_DIR}/Euclidean.cpp"
   )
 endfunction()
 

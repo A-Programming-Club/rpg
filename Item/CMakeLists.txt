@@ -1,5 +1,5 @@
 # This version is subject to change as we figure out what standards we will use.
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 
 include_guard(GLOBAL)
 
@@ -23,18 +23,18 @@ set(EQUIPMENT_DIR "${PROJECT_SOURCE_DIR}/Equipment")
 function(init_lib_item target)
   target_sources(${target}
     PUBLIC
-    "${ITEM_DIR}/item.hpp"
+    "${ITEM_DIR}/Item.hpp"
     PRIVATE
-    "${ITEM_DIR}/item.cpp"
+    "${ITEM_DIR}/Item.cpp"
   )
 endfunction()
 
 function(init_lib_consumable target)
   target_sources(${target}
     PUBLIC
-    "${CONSUMABLE_DIR}/consumable.hpp"
+    "${CONSUMABLE_DIR}/Consumable.hpp"
     PRIVATE
-    "${CONSUMABLE_DIR}/consumable.cpp"
+    "${CONSUMABLE_DIR}/Consumable.cpp"
   )
 endfunction()
 
@@ -43,11 +43,11 @@ function(init_lib_equipment target)
   set(WEAPON_DIR "${EQUIPMENT_DIR}/Weapon")
   target_sources(${target}
     PUBLIC
-    "${GARB_DIR}/garb.hpp"
-    "${WEAPON_DIR}/weapon.hpp"
+    "${GARB_DIR}/Garb.hpp"
+    "${WEAPON_DIR}/Weapon.hpp"
     PRIVATE
-    "${GARB_DIR}/garb.cpp"
-    "${WEAPON_DIR}/weapon.cpp"
+    "${GARB_DIR}/Garb.cpp"
+    "${WEAPON_DIR}/Weapon.cpp"
   )
 endfunction()
 

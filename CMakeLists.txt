@@ -1,5 +1,5 @@
 # This version is subject to change as we figure out what standards we will use.
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.16)
 
 include_guard(GLOBAL)
 
