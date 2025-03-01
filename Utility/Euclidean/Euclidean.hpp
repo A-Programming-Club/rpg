@@ -2,7 +2,7 @@
 #ifndef EUCLIDEAN_H
 #define EUCLIDEAN_H
 
-#include <../Cartesian/Cartesian.hpp>
+#include "../Cartesian/Cartesian.hpp"
 
 class Euclidean {
 public:

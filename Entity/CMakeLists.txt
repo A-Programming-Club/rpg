@@ -30,24 +30,6 @@ function(init_lib_entity target)
   )
 endfunction()
 
-function(init_lib_character target)
-  target_sources(${target}
-    PUBLIC
-    "${CHARACTER_DIR}/Character.hpp"
-    PRIVATE
-    "${CHARACTER_DIR}/Character.cpp"
-  )
-endfunction()
-
-function(init_lib_npc target)
-  target_sources(${target}
-    PUBLIC
-    "${NPC_DIR}/NPC.hpp"
-    PRIVATE
-    "${NPC_DIR}/NPC.cpp"
-  )
-endfunction()
-
 function(init_lib_race target)
   target_sources(${target}
     PUBLIC
@@ -61,21 +43,11 @@ if(DISCRETE_OUTPUT)
   add_library(entity STATIC)
   init_lib_entity(entity)
 
-  add_library(character STATIC)
-  init_lib_character(character)
-  target_link_libraries(character PUBLIC entity)
-
-  add_library(npc STATIC)
-  init_lib_npc(npc)
-  target_link_libraries(npc PUBLIC entity)
-
   add_library(race STATIC)
   init_lib_race(race)
   target_link_libraries(race PUBLIC entity)
 else()
   add_library(entity STATIC)
   init_lib_entity(entity)
-  init_lib_character(entity)
-  init_lib_npc(entity)
   init_lib_race(entity)
 endif()

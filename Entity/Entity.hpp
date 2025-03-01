@@ -1,16 +1,29 @@
 #pragma once
 #ifndef ENTITY_H
 #define ENTITY_H
+#include <iostream>
+#include "../Utility/Cartesian/Cartesian.hpp"
 
 #include <vector>
 #include <map>
-#include <Entity/Race/race.hpp>
+#include "Race/Race.hpp"
 
-class Entity {
+class Entity
+{
 public:
+    void move_up();
+    void move_up_left();
+    void move_up_right();
+    void move_down();
+    void move_down_right();
+    void move_down_left();
+    void move_right();
+    void move_left();
 
 private:
+    Cartesian position;
     Race race;
+    std::string name;
     double maxHealth;
     double health;
     double maxAgility;
