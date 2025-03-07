@@ -12,10 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(COMBAT_DIR ${PROJECT_SOURCE_DIR})
 
 function(init_lib_damagetypes target)
-  target_sources(${target}
-    PUBLIC
-    "${COMBAT_DIR}/DamageTypes.hpp"
-  )
+  target_include_directories(${target} INTERFACE "${COMBAT_DIR}")
 endfunction()
 
 add_library(Combat INTERFACE)
