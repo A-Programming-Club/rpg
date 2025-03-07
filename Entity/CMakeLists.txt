@@ -18,7 +18,6 @@ set(DISCRETE_OUTPUT off)
 
 set(ENTITY_DIR ${PROJECT_SOURCE_DIR})
 set(CHARACTER_DIR "${PROJECT_SOURCE_DIR}/Character")
-set(NPC_DIR "${PROJECT_SOURCE_DIR}/NPC")
 set(RACE_DIR "${PROJECT_SOURCE_DIR}/Race")
 
 function(init_lib_entity target)
@@ -39,15 +38,6 @@ function(init_lib_character target)
   )
 endfunction()
 
-function(init_lib_npc target)
-  target_sources(${target}
-    PUBLIC
-    "${NPC_DIR}/NPC.hpp"
-    PRIVATE
-    "${NPC_DIR}/NPC.cpp"
-  )
-endfunction()
-
 function(init_lib_race target)
   target_sources(${target}
     PUBLIC
@@ -58,24 +48,19 @@ function(init_lib_race target)
 endfunction()
 
 if(DISCRETE_OUTPUT)
-  add_library(entity STATIC)
-  init_lib_entity(entity)
+  add_library(Entity STATIC)
+  init_lib_entity(Entity)
 
-  add_library(character STATIC)
-  init_lib_character(character)
-  target_link_libraries(character PUBLIC entity)
+  add_library(Character STATIC)
+  init_lib_character(Character)
+  target_link_libraries(Character PUBLIC Entity)
 
-  add_library(npc STATIC)
-  init_lib_npc(npc)
-  target_link_libraries(npc PUBLIC entity)
-
-  add_library(race STATIC)
-  init_lib_race(race)
-  target_link_libraries(race PUBLIC entity)
+  add_library(Race STATIC)
+  init_lib_race(Race)
+  target_link_libraries(Entity PUBLIC Race)
 else()
-  add_library(entity STATIC)
-  init_lib_entity(entity)
-  init_lib_character(entity)
-  init_lib_npc(entity)
-  init_lib_race(entity)
+  add_library(Entity STATIC)
+  init_lib_entity(Entity)
+  init_lib_character(Entity)
+  init_lib_race(Entity)
 endif()

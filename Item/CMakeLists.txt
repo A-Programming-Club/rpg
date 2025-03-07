@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 
 include_guard(GLOBAL)
 
-project(items)
+project(Items)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -38,33 +38,45 @@ function(init_lib_consumable target)
   )
 endfunction()
 
-function(init_lib_equipment target)
+function(init_lib_garb target)
   set(GARB_DIR "${EQUIPMENT_DIR}/Garb")
-  set(WEAPON_DIR "${EQUIPMENT_DIR}/Weapon")
   target_sources(${target}
     PUBLIC
     "${GARB_DIR}/Garb.hpp"
-    "${WEAPON_DIR}/Weapon.hpp"
     PRIVATE
     "${GARB_DIR}/Garb.cpp"
+  )
+endfunction()
+
+function(init_lib_weapon target)
+  set(WEAPON_DIR "${EQUIPMENT_DIR}/Weapon")
+  target_sources(${target}
+    PUBLIC
+    "${WEAPON_DIR}/Weapon.hpp"
+    PRIVATE
     "${WEAPON_DIR}/Weapon.cpp"
   )
 endfunction()
 
 if(DISCRETE_OUTPUT)
-  add_library(item STATIC)
+  add_library(Item STATIC)
   init_lib_item(item)
 
-  add_library(consumable STATIC)
-  init_lib_consumable(consumable)
-  target_link_libraries(consumable PUBLIC item)
+  add_library(Consumable STATIC)
+  init_lib_consumable(Consumable)
+  target_link_libraries(Consumable PUBLIC Item)
 
-  add_library(equipment STATIC)
-  init_lib_equipment(equipment)
-  target_link_libraries(equipment PUBLIC item)
+  add_library(Garb STATIC)
+  init_lib_garb(Garb)
+  target_link_libraries(Garb PUBLIC Item)
+
+  add_library(Weapon STATIC)
+  init_lib_weapon(Weapon)
+  target_link_libraries(Weapon PUBLIC Item)
 else()
-  add_library(item STATIC)
-  init_lib_item(item)
-  init_lib_consumable(item)
-  init_lib_equipment(item)
+  add_library(Item STATIC)
+  init_lib_item(Item)
+  init_lib_consumable(Item)
+  init_lib_garb(Item)
+  init_lib_weapon(Item)
 endif()
